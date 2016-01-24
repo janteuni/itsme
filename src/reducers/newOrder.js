@@ -5,7 +5,7 @@ export default handleActions({
   UPDATE_ORDER: (state, { payload: order }) => {
     return {
       ...state,
-      order
+      ...order
     }
   }
 
