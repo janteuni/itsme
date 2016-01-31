@@ -23,9 +23,12 @@ class FormOrder extends Component {
   render () {
     const { newOrder } = this.props
     return (
-      <form onSubmit={(e) => {e.preventDefault(); this.props.dispatch(saveOrder())}}>
+      <form onSubmit={(e) => { e.preventDefault(); this.props.dispatch(saveOrder()) }}>
         <h2>Form here</h2>
-         <input type='text' defaultValue={newOrder.firstname} ref='firstname' onBlur={::this.handleUpdate}/>
+         <input type='text'
+           defaultValue={newOrder.firstname}
+           ref='firstname'
+           onBlur={::this.handleUpdate}/>
          <p>{newOrder.firstname}</p>
          <button>SAVE</button>
       </form>

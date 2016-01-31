@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import Toasts from 'components/Toasts'
-import config from 'config'
 
 if (process.env.BROWSER) { require('styles/main.scss') }
 

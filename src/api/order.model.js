@@ -9,6 +9,6 @@ const Order = mongoose.model('Order', {
   adress: String,
   country: String,
   comment: String
-});
+})
 
 export default Order

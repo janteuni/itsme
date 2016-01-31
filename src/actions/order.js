@@ -11,7 +11,7 @@ export const saveOrder = () => (dispatch, getState) => {
   const { newOrder } = state
   r.post(`${config.apiFull}/order`)
     .send(newOrder)
-    .end((err, res) => {
+    .end(() => {
       dispatch(pushMessage({
         message: 'Cool!',
         type: 'success'
