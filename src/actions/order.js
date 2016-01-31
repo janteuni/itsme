@@ -2,9 +2,9 @@ import { createAction } from 'redux-actions'
 import r from 'superagent'
 
 import config from 'config'
+import { pushMessage } from 'actions/messages'
 
 export const updateOrder = createAction('UPDATE_ORDER')
-export const orderSaved = createAction('ORDER_SAVED')
 
 export const saveOrder = () => (dispatch, getState) => {
   const state = getState()
@@ -12,7 +12,9 @@ export const saveOrder = () => (dispatch, getState) => {
   r.post(`${config.apiFull}/order`)
     .send(newOrder)
     .end((err, res) => {
-      console.log(err, res)
-      dispatch(orderSaved())
+      dispatch(pushMessage({
+        message: 'Cool!',
+        type: 'success'
+      }))
     })
 }

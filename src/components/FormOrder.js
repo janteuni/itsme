@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { updateOrder, saveOrder } from 'actions'
+import { updateOrder, saveOrder } from 'actions/order'
 
 @connect(
   state => ({
