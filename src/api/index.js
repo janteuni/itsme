@@ -1,6 +1,9 @@
 import express from 'express'
+import mongoose from 'mongoose'
 
 import * as Order from 'api/order.service'
+
+mongoose.connect('mongodb://localhost/itsme')
 
 const router = express.Router()
 

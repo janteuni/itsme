@@ -1,15 +1,6 @@
 import { handleActions } from 'redux-actions'
 
-export default handleActions({
-
-  UPDATE_ORDER: (state, { payload: order }) => {
-    return {
-      ...state,
-      ...order
-    }
-  }
-
-}, {
+const initialState = {
 
   istmes: [],
   groupSheet: false,
@@ -21,4 +12,15 @@ export default handleActions({
   country: '',
   comment: ''
 
-})
+}
+
+export default handleActions({
+
+  UPDATE_ORDER: (state, { payload: order }) => {
+    return {
+      ...state,
+      ...order
+    }
+  }
+
+}, initialState)
