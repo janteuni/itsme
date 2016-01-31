@@ -5,18 +5,13 @@ const env = process.env.NODE_ENV || 'development'
 
 export default {
 
+  entry: ['./src/client'],
+
   resolve: {
-    modulesDirectories: ['node_modules', 'src'],
+    modulesDirectories: ['node_modules', 'src']
   },
 
-  loaders: [{
-    test: /\.(woff|woff2|eot|svg|ttf)$/,
-    loader: 'url?limit=100000'
-  }],
-
-  entry: [
-    './src/client'
-  ],
+  loaders: [],
 
   output: {
     path: path.join(__dirname, '../dist'),

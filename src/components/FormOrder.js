@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { updateOrder } from 'actions'
+import { updateOrder, saveOrder } from 'actions'
 
 @connect(
   state => ({
@@ -23,10 +23,11 @@ class FormOrder extends Component {
   render () {
     const { newOrder } = this.props
     return (
-      <form>
+      <form onSubmit={(e) => {e.preventDefault(); this.props.dispatch(saveOrder())}}>
         <h2>Form here</h2>
          <input type='text' defaultValue={newOrder.firstname} ref='firstname' onBlur={::this.handleUpdate}/>
          <p>{newOrder.firstname}</p>
+         <button>SAVE</button>
       </form>
     )
   }
