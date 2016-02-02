@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { updateOrder, saveOrder } from 'actions/order'
 
+import Upload from 'components/Upload'
+
 @connect(
   state => ({
     newOrder: state.newOrder
@@ -20,6 +22,10 @@ class FormOrder extends Component {
     this.props.dispatch(updateOrder(data))
   }
 
+  handleUpload (filesNames) {
+    console.log('Genial ', filesNames)
+  }
+
   render () {
     const { newOrder } = this.props
     return (
@@ -29,7 +35,7 @@ class FormOrder extends Component {
            defaultValue={newOrder.firstname}
            ref='firstname'
            onBlur={::this.handleUpdate}/>
-         <p>{newOrder.firstname}</p>
+           <Upload onSuccess={::this.handleUpload} />
          <button>SAVE</button>
       </form>
     )
