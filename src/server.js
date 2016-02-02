@@ -20,6 +20,7 @@ if (config.env === 'production') {
 }
 
 server.use('/assets', express.static(config.assetsFolder))
+server.use(config.uploadPath, express.static(config.uploadFolder))
 server.use(render)
 
 server.listen(config.port, 'localhost', err => {

@@ -18,3 +18,5 @@ export const saveOrder = () => (dispatch, getState) => {
       }))
     })
 }
+
+export const addImages = createAction('ADD_IMAGES')

@@ -30,6 +30,7 @@ class Upload extends Component {
 
   render () {
     const { files } = this.state
+    const { cacheImages } = this.props
     return (
       <div>
         <Dropzone onDrop={::this.handleDrop}>
@@ -39,10 +40,17 @@ class Upload extends Component {
           <div>
             <h2>Uploading {files.length} files...</h2>
             <div>
-              {files.map((file) => (
+              {files.map(file => (
                 <img key={file.name} src={file.preview} />
               ))}
             </div>
+          </div>
+        )}
+        {!!cacheImages.length && (
+          <div>
+            {cacheImages.map(file => (
+              <img key={file} src={`${config.uploadPath}/${file}`} />
+            ))}
           </div>
         )}
       </div>

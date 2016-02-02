@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { updateOrder, saveOrder } from 'actions/order'
+import { updateOrder, saveOrder, addImages } from 'actions/order'
 
-import Upload from 'components/Upload'
+import Itsme from 'components/Itsme'
 
 @connect(
   state => ({
@@ -22,8 +22,8 @@ class FormOrder extends Component {
     this.props.dispatch(updateOrder(data))
   }
 
-  handleUpload (filesNames) {
-    console.log('Genial ', filesNames)
+  handleUpload (id, filesNames) {
+    this.props.dispatch(addImages({ id, images: filesNames }))
   }
 
   render () {
@@ -31,11 +31,13 @@ class FormOrder extends Component {
     return (
       <form onSubmit={(e) => { e.preventDefault(); this.props.dispatch(saveOrder()) }}>
         <h2>Form here</h2>
-         <input type='text'
-           defaultValue={newOrder.firstname}
-           ref='firstname'
-           onBlur={::this.handleUpdate}/>
-           <Upload onSuccess={::this.handleUpload} />
+        <input type='text'
+          defaultValue={newOrder.firstname}
+          ref='firstname'
+          onBlur={::this.handleUpdate}/>
+        {newOrder.itsmes.map(itsme => (
+          <Itsme key={itsme.id} data={itsme} onUpload={this.handleUpload.bind(this, itsme.id)} />
+        ))}
          <button>SAVE</button>
       </form>
     )
