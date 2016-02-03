@@ -24,6 +24,7 @@ class Upload extends Component {
       .send(fd)
       .end((err, res) => {
         if (err) { return }
+        this.setState({ files: [] })
         onSuccess(res.body)
       })
   }
@@ -36,6 +37,13 @@ class Upload extends Component {
         <Dropzone onDrop={::this.handleDrop}>
           <div>Try dropping some files here, or click to select files to upload.</div>
         </Dropzone>
+        {!!cacheImages.length && (
+          <div>
+            {cacheImages.map(file => (
+              <img key={file} src={`${config.uploadPath}/${file}`} />
+            ))}
+          </div>
+        )}
         {!!files.length && (
           <div>
             <h2>Uploading {files.length} files...</h2>
@@ -44,13 +52,6 @@ class Upload extends Component {
                 <img key={file.name} src={file.preview} />
               ))}
             </div>
-          </div>
-        )}
-        {!!cacheImages.length && (
-          <div>
-            {cacheImages.map(file => (
-              <img key={file} src={`${config.uploadPath}/${file}`} />
-            ))}
           </div>
         )}
       </div>
