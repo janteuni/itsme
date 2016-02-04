@@ -24,10 +24,12 @@ router.post('/upload', upload.array('file', 12), (req, res) => {
   res.status(200).send(filesNames)
 })
 
-router.delete('/image', (req, res) => {
-  const { imageId } = req.body
-  const imagePath = path.join(config.uploadFolder, imageId)
-  fs.unlink(imagePath)
+router.delete('/images', (req, res) => {
+  const imagesIds = req.body
+  imagesIds.forEach(imageId => {
+    const imagePath = path.join(config.uploadFolder, imageId)
+    fs.unlink(imagePath)
+  })
   res.sendStatus(200)
 })
 

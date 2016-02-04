@@ -36,7 +36,7 @@ export default handleActions({
     }
   },
 
-  DELETE_ITSME: (state, { payload: id }) => {
+  ITSME_DELETED: (state, { payload: id }) => {
     return {
       ...state,
       itsmes: state.itsmes.filter(itsme => itsme.id !== id)
