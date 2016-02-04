@@ -20,3 +20,10 @@ export const saveOrder = () => (dispatch, getState) => {
 }
 
 export const addImages = createAction('ADD_IMAGES')
+export const imageDeleted = createAction('IMAGE_DELETED')
+export const deleteImage = payload => dispatch => {
+  dispatch(imageDeleted(payload))
+  r.delete(`${config.apiFull}/image`)
+    .send({ imageId: payload.imageId })
+    .end()
+}

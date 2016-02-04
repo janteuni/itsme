@@ -41,6 +41,25 @@ export default handleActions({
       ]
     }
     return out
+  },
+
+  IMAGE_DELETED: (state, { payload }) => {
+    const { itsmeId, imageId } = payload
+    const original = _.find(state.itsmes, el => el.id === itsmeId)
+    const newItsme = {
+      ...original,
+      images: original.images.filter(id => id !== imageId)
+    }
+    const index = state.itsmes.indexOf(original)
+    const out = {
+      ...state,
+      itsmes: [
+        ...state.itsmes.slice(0, index),
+        newItsme,
+        ...state.itsmes.slice(index + 1)
+      ]
+    }
+    return out
   }
 
 }, initialState)

@@ -29,6 +29,10 @@ class Upload extends Component {
       })
   }
 
+  handleImageClick (imageId) {
+    this.props.onImageDelete(imageId)
+  }
+
   render () {
     const { files } = this.state
     const { cacheImages } = this.props
@@ -40,7 +44,10 @@ class Upload extends Component {
         {!!cacheImages.length && (
           <div>
             {cacheImages.map(file => (
-              <img key={file} src={`${config.uploadPath}/${file}`} />
+              <img
+                key={file}
+                src={`${config.uploadPath}/${file}`}
+                onClick={this.handleImageClick.bind(this, file)}/>
             ))}
           </div>
         )}

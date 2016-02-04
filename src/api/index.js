@@ -1,6 +1,9 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import path from 'path'
+import fs from 'fs'
 
+import config from 'config'
 import * as Order from 'api/order.service'
 import upload from 'api/upload'
 
@@ -19,6 +22,13 @@ router.post('/order', (req, res) => {
 router.post('/upload', upload.array('file', 12), (req, res) => {
   const filesNames = req.files.map(f => f.filename)
   res.status(200).send(filesNames)
+})
+
+router.delete('/image', (req, res) => {
+  const { imageId } = req.body
+  const imagePath = path.join(config.uploadFolder, imageId)
+  fs.unlink(imagePath)
+  res.sendStatus(200)
 })
 
 export default router

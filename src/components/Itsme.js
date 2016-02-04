@@ -9,7 +9,10 @@ class Itsme extends Component {
 
     return (
       <div>
-        <Upload cacheImages={data.images} onSuccess={this.props.onUpload} />
+        <Upload
+          cacheImages={data.images}
+          onSuccess={this.props.onUpload}
+          onImageDelete={this.props.onImageDelete}/>
         <p>Sheets: {data.sheets}</p>
       </div>
     )
