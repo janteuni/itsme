@@ -5,6 +5,8 @@ import config from 'config'
 import { pushMessage } from 'actions/messages'
 
 export const updateOrder = createAction('UPDATE_ORDER')
+export const addItsme = createAction('ADD_ITSME')
+export const deleteItsme = createAction('DELETE_ITSME')
 
 export const saveOrder = () => (dispatch, getState) => {
   const state = getState()

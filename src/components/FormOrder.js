@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { updateOrder, saveOrder, addImages, deleteImage } from 'actions/order'
+import { updateOrder, saveOrder, addItsme } from 'actions/order'
 
 import Itsme from 'components/Itsme'
 
@@ -22,12 +22,8 @@ class FormOrder extends Component {
     this.props.dispatch(updateOrder(data))
   }
 
-  handleUpload (id, filesNames) {
-    this.props.dispatch(addImages({ id, images: filesNames }))
-  }
-
-  handleImageDelete (itsmeId, imageId) {
-    this.props.dispatch(deleteImage({ itsmeId, imageId }))
+  handleAddItsme () {
+    this.props.dispatch(addItsme())
   }
 
   render () {
@@ -42,11 +38,10 @@ class FormOrder extends Component {
         {newOrder.itsmes.map(itsme => (
           <Itsme
             key={itsme.id}
-            data={itsme}
-            onUpload={this.handleUpload.bind(this, itsme.id)}
-            onImageDelete={this.handleImageDelete.bind(this, itsme.id)}/>
+            data={itsme} />
         ))}
-         <button>SAVE</button>
+        <button onClick={::this.handleAddItsme}>ADD ITSME</button>
+        <button>SAVE</button>
       </form>
     )
   }

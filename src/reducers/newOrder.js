@@ -25,6 +25,24 @@ export default handleActions({
     }
   },
 
+  ADD_ITSME: state => {
+    const newItsme = { id: shortid.generate(), images: [], sheets: 2 }
+    return {
+      ...state,
+      itsmes: [
+        ...state.itsmes,
+        newItsme
+      ]
+    }
+  },
+
+  DELETE_ITSME: (state, { payload: id }) => {
+    return {
+      ...state,
+      itsmes: state.itsmes.filter(itsme => itsme.id !== id)
+    }
+  },
+
   ADD_IMAGES: (state, { payload }) => {
     const original = _.find(state.itsmes, el => el.id === payload.id)
     const newItsme = {
