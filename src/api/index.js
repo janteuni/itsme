@@ -1,22 +1,12 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import multer from 'multer'
-import shortid from 'shortid'
-import mime from 'mime'
 
 import * as Order from 'api/order.service'
+import upload from 'api/upload'
 
 mongoose.connect('mongodb://localhost/itsme')
 
 const router = express.Router()
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, cb) => {
-    const name = `${shortid.generate()}.${mime.extension(file.mimetype)}`
-    cb(null, name)
-  }
-})
-const upload = multer({ storage })
 
 router.get('/', (req, res) => res.send('[ API UP ]'))
 
