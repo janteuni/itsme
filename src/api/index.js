@@ -13,10 +13,16 @@ const router = express.Router()
 
 router.get('/', (req, res) => res.send('[ API UP ]'))
 
+router.get('/orders', (req, res) => {
+  Order.getOrders()
+    .then(orders => res.status(200).send(orders))
+    .catch(err => res.status(500).send(err))
+})
+
 router.post('/order', (req, res) => {
   Order.saveOrder(req.body)
     .then(() => res.sendStatus(200))
-    .catch((err) => res.status(500).send(err))
+    .catch(err => res.status(500).send(err))
 })
 
 router.post('/upload', upload.array('file', 12), (req, res) => {

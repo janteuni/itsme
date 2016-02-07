@@ -8,3 +8,10 @@ export const saveOrder = (order) => new Promise((resolve, reject) => {
     resolve()
   })
 })
+
+export const getOrders = () => new Promise((resolve, reject) => {
+  Order.find({}, (err, orders) => {
+    if (err) { return reject(err) }
+    resolve(orders)
+  })
+})
