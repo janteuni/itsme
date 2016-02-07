@@ -9,7 +9,13 @@ const Order = mongoose.model('Order', {
   address: String,
   country: String,
   comment: String,
-  money: { type: Boolean, default: false }
+  money: { type: Boolean, default: false },
+  date: Date,
+  status: {
+    type: String,
+    enum: ['todo', 'doing', 'sent', 'canceled'],
+    default: 'todo'
+  }
 })
 
 export default Order
