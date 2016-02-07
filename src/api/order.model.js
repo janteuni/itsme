@@ -1,14 +1,15 @@
 import mongoose from 'mongoose'
 
 const Order = mongoose.model('Order', {
-  istmes: Array,
+  itsmes: [],
   groupSheet: Boolean,
   firstname: String,
   lastname: String,
   email: String,
-  adress: String,
+  address: String,
   country: String,
-  comment: String
+  comment: String,
+  money: { type: Boolean, default: false }
 })
 
 export default Order

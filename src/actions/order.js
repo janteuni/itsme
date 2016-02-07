@@ -5,9 +5,21 @@ import _ from 'lodash'
 import config from 'config'
 import { pushMessage } from 'actions/messages'
 
-export const updateOrder = createAction('UPDATE_ORDER')
-export const addItsme = createAction('ADD_ITSME')
-export const itsmeDeleted = createAction('ITSME_DELETED')
+const updatePrice = createAction('UPDATE_PRICE')
+
+const priceModifier = actionName => {
+  const action = createAction(actionName)
+  return payload => dispatch => {
+    dispatch(action(payload))
+    dispatch(updatePrice())
+  }
+}
+
+export const updateOrder = priceModifier('UPDATE_ORDER')
+export const updateSheets = priceModifier('UPDATE_SHEETS')
+export const addItsme = priceModifier('ADD_ITSME')
+export const itsmeDeleted = priceModifier('ITSME_DELETED')
+
 export const deleteItsme = itsmeId => (dispatch, getState) => {
   const state = getState()
   const itsme = _.find(state.newOrder.itsmes, { id: itsmeId })

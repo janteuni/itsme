@@ -10,13 +10,37 @@ const initialState = {
   firstname: 'toto',
   lastname: '',
   email: '',
-  adress: '',
+  address: '',
   country: '',
-  comment: ''
+  comment: '',
+
+  price: 16
 
 }
 
 export default handleActions({
+
+  UPDATE_PRICE: state => {
+    const sheetPrice = 1.75
+    const itsmePrice = 11
+    const groupPrice = 3
+
+    const nbSheets = state.itsmes.reduce((acc, itsme) => {
+      return acc + itsme.sheets
+    }, 0)
+    const allSheetsPrice = nbSheets * sheetPrice
+    const allItsmePrice = state.itsmes.length * itsmePrice
+
+    const price = 1.5
+      + allSheetsPrice
+      + allItsmePrice
+      + (state.groupSheet ? groupPrice : 0)
+
+    return {
+      ...state,
+      price
+    }
+  },
 
   UPDATE_ORDER: (state, { payload: order }) => {
     return {
@@ -41,6 +65,24 @@ export default handleActions({
       ...state,
       itsmes: state.itsmes.filter(itsme => itsme.id !== id)
     }
+  },
+
+  UPDATE_SHEETS: (state, { payload }) => {
+    const original = _.find(state.itsmes, el => el.id === payload.id)
+    const newItsme = {
+      ...original,
+      sheets: payload.sheets
+    }
+    const index = state.itsmes.indexOf(original)
+    const out = {
+      ...state,
+      itsmes: [
+        ...state.itsmes.slice(0, index),
+        newItsme,
+        ...state.itsmes.slice(index + 1)
+      ]
+    }
+    return out
   },
 
   ADD_IMAGES: (state, { payload }) => {
