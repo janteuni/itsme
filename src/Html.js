@@ -5,12 +5,12 @@ const Html = ({ content, state, stats: { style, main = 'bundle.js' } }) => (
     <head>
 
       <meta charSet='utf-8' />
-      <link rel='icon' href='assets/favicon.ico' type='image/x-icon' />
+      <link rel='icon' href='/assets/favicon.ico' type='image/x-icon' />
 
       <title>{'[::]'}</title>
 
       {style && (
-        <link href={`dist/${style}`} rel='stylesheet' />
+        <link href={`/dist/${style}`} rel='stylesheet' />
       )}
 
       {state && (

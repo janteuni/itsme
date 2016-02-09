@@ -3,7 +3,8 @@ import _ from 'lodash'
 
 const initialState = {
   orders: {},
-  list: []
+  list: [],
+  current: {}
 }
 
 export default handleActions({
@@ -16,6 +17,13 @@ export default handleActions({
       ...state,
       orders,
       list: Object.keys(orders)
+    }
+  },
+
+  SET_CURRENT_ORDER: (state, { payload: id }) => {
+    return {
+      ...state,
+      current: id
     }
   }
 }, initialState)

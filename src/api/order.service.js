@@ -15,3 +15,10 @@ export const getOrders = () => new Promise((resolve, reject) => {
     resolve(orders)
   })
 })
+
+export const getOrder = _id => new Promise((resolve, reject) => {
+  Order.findOne({ _id }, (err, order) => {
+    if (err) { return reject(err) }
+    resolve(order)
+  })
+})
