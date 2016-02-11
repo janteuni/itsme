@@ -19,13 +19,19 @@ router.get('/orders', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 
-router.get('/order/:id', (req, res) => {
+router.get('/orders/:id', (req, res) => {
   Order.getOrder(req.params.id)
     .then(order => res.status(200).send(order))
     .catch(err => res.status(500).send(err))
 })
 
-router.post('/order', (req, res) => {
+router.put('/orders/:id', (req, res) => {
+  Order.updateOrder(req.params.id, req.body)
+    .then(order => res.status(200).send(order))
+    .catch(err => res.status(500).send(err))
+})
+
+router.post('/orders', (req, res) => {
   Order.saveOrder(req.body)
     .then(() => res.sendStatus(200))
     .catch(err => res.status(500).send(err))

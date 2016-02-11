@@ -15,7 +15,7 @@ export const loadList = () => dispatch => new Promise((resolve, reject) => {
 })
 
 export const fetchOrder = (id) => dispatch => new Promise((resolve, reject) => {
-  r.get(`${config.apiFull}/order/${id}`)
+  r.get(`${config.apiFull}/orders/${id}`)
     .end((err, res) => {
       if (err) { return reject(err) }
       dispatch(listLoaded([res.body]))
@@ -24,3 +24,15 @@ export const fetchOrder = (id) => dispatch => new Promise((resolve, reject) => {
 })
 
 export const setCurrentOrder = createAction('SET_CURRENT_ORDER')
+
+const statusUpdated = createAction('STATUS_UPDATED')
+
+export const updateStatus = payload => dispatch => new Promise((resolve, reject) => {
+  r.put(`${config.apiFull}/orders/${payload.id}`)
+    .send({ status: payload.status })
+    .end(err => {
+      if (err) { return reject(err) }
+      dispatch(statusUpdated(payload))
+      resolve()
+    })
+})

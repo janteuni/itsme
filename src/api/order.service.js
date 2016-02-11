@@ -22,3 +22,10 @@ export const getOrder = _id => new Promise((resolve, reject) => {
     resolve(order)
   })
 })
+
+export const updateOrder = (_id, data) => new Promise((resolve, reject) => {
+  Order.update({ _id }, data, (err, order) => {
+    if (err) { return reject(err) }
+    resolve(order)
+  })
+})

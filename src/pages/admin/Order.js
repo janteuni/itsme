@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { prefetch } from 'react-fetcher'
 
-import { setCurrentOrder, fetchOrder } from 'actions/admin'
+import { updateStatus, setCurrentOrder, fetchOrder } from 'actions/admin'
 
 @prefetch(
   ({ params, dispatch }) => {
@@ -17,11 +17,24 @@ import { setCurrentOrder, fetchOrder } from 'actions/admin'
 )
 class Order extends Component {
 
+  handleChange (e) {
+    const { order } = this.props
+    this.props.dispatch(updateStatus({
+      id: order._id,
+      status: e.target.value
+    }))
+  }
+
   render () {
     const { order } = this.props
     return (
       <div>
-        {order.firstname} / {order.lastname}
+        {order.firstname} / {order.lastname} / {order.status}
+        <select ref='select' value={order.status} onChange={::this.handleChange}>
+          <option value='doing'>DOING</option>
+          <option value='sent'>SENT</option>
+          <option value='canceled'>CANCELED</option>
+        </select>
       </div>
     )
   }

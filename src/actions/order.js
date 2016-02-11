@@ -32,7 +32,7 @@ export const deleteItsme = itsmeId => (dispatch, getState) => {
 export const saveOrder = () => (dispatch, getState) => {
   const state = getState()
   const { newOrder } = state
-  r.post(`${config.apiFull}/order`)
+  r.post(`${config.apiFull}/orders`)
     .send(newOrder)
     .end(() => {
       dispatch(pushMessage({

@@ -25,5 +25,20 @@ export default handleActions({
       ...state,
       current: id
     }
+  },
+
+  STATUS_UPDATED: (state, { payload }) => {
+    const order = {
+      ...state.orders[payload.id],
+      status: payload.status
+    }
+    const orders = {
+      ...state.orders,
+      [payload.id]: order
+    }
+    return {
+      ...state,
+      orders
+    }
   }
 }, initialState)
