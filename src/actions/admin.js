@@ -36,3 +36,12 @@ export const updateStatus = payload => dispatch => new Promise((resolve, reject)
       resolve()
     })
 })
+
+export const addResults = createAction('ADD_RESULTS')
+export const deleteResult = createAction('DELETE_RESULT')
+export const saveCurrent = () => (dispatch, getState) => {
+  const state = getState()
+  r.put(`${config.apiFull}/orders/${state.orders.current}`)
+    .send(state.orders.orders[state.orders.current])
+    .end()
+}

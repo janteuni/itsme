@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { prefetch } from 'react-fetcher'
 
 import { updateStatus, setCurrentOrder, fetchOrder } from 'actions/admin'
+import ItsmeAdmin from 'components/ItsmeAdmin'
 
 @prefetch(
   ({ params, dispatch }) => {
@@ -35,6 +36,7 @@ class Order extends Component {
           <option value='sent'>SENT</option>
           <option value='canceled'>CANCELED</option>
         </select>
+        {order.itsmes.map(itsme => <ItsmeAdmin data={itsme} key={itsme.id} />)}
       </div>
     )
   }

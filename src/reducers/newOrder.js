@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const initialState = {
 
-  itsmes: [{ id: shortid.generate(), images: [], sheets: 2 }],
+  itsmes: [{ id: shortid.generate(), images: [], sheets: 2, results: [] }],
   groupSheet: false,
 
   firstname: 'toto',
@@ -50,7 +50,7 @@ export default handleActions({
   },
 
   ADD_ITSME: state => {
-    const newItsme = { id: shortid.generate(), images: [], sheets: 2 }
+    const newItsme = { id: shortid.generate(), images: [], sheets: 2, results: [] }
     return {
       ...state,
       itsmes: [

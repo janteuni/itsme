@@ -4,7 +4,7 @@ import _ from 'lodash'
 const initialState = {
   orders: {},
   list: [],
-  current: {}
+  current: null
 }
 
 export default handleActions({
@@ -40,5 +40,59 @@ export default handleActions({
       ...state,
       orders
     }
+  },
+
+  ADD_RESULTS: (state, { payload }) => {
+    const order = state.orders[state.current]
+    const original = _.find(order.itsmes, el => el.id === payload.id)
+    const newItsme = {
+      ...original,
+      results: original.results.concat(payload.images)
+    }
+    const index = order.itsmes.indexOf(original)
+    const newOrder = {
+      ...order,
+      itsmes: [
+        ...order.itsmes.slice(0, index),
+        newItsme,
+        ...order.itsmes.slice(index + 1)
+      ]
+    }
+    const out = {
+      ...state,
+      orders: {
+        ...state.orders,
+        [state.current]: newOrder
+      }
+    }
+    return out
+  },
+
+  DELETE_RESULT: (state, { payload }) => {
+    const { itsmeId, imageId } = payload
+    const order = state.orders[state.current]
+    const original = _.find(order.itsmes, el => el.id === itsmeId)
+    const newItsme = {
+      ...original,
+      results: original.results.filter(id => id !== imageId)
+    }
+    const index = order.itsmes.indexOf(original)
+    const newOrder = {
+      ...order,
+      itsmes: [
+        ...order.itsmes.slice(0, index),
+        newItsme,
+        ...order.itsmes.slice(index + 1)
+      ]
+    }
+    const out = {
+      ...state,
+      orders: {
+        ...state.orders,
+        [state.current]: newOrder
+      }
+    }
+    return out
   }
+
 }, initialState)
