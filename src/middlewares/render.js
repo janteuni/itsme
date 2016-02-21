@@ -62,7 +62,8 @@ export default (req, res) => {
       res.end(page)
 
     }).catch(err => {
-      res.status(500).send(err)
+      console.log(err)
+      res.status(500).send(err.stack)
     })
   })
 

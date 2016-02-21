@@ -6,9 +6,13 @@ class Create extends Component {
 
   render () {
     return (
-      <div>
-        <h1>Order your Itsme</h1>
-        <FormOrder />
+      <div className='flex'>
+        <div className='illustration--container'>
+          <h1>Order your Itsme</h1>
+        </div>
+        <div className='flex-auto'>
+          <FormOrder />
+        </div>
       </div>
     )
   }

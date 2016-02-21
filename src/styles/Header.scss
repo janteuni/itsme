@@ -1,0 +1,11 @@
+header {
+  background: $blue-500;
+  a {
+    display: inline-block;
+    padding: 1rem;
+
+    color: $blue-100;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
