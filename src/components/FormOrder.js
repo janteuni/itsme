@@ -42,14 +42,26 @@ class FormOrder extends Component {
   render () {
     const { newOrder } = this.props
     return (
-      <form onSubmit={(e) => { e.preventDefault(); this.props.dispatch(saveOrder()) }}>
-        <h2>Price: {newOrder.price}</h2>
-        {newOrder.itsmes.map(itsme => (
-          <Itsme
-            key={itsme.id}
-            data={itsme} />
-        ))}
-        <button onClick={::this.handleAddItsme}>ADD ITSME</button>
+      <form className='form-container' onSubmit={(e) => { e.preventDefault(); this.props.dispatch(saveOrder()) }}>
+
+        <div className='form-title'>
+          <div className='dot-number'>1</div>
+          <h1>Upload your photos</h1>
+        </div>
+
+        <div className='form-block'>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce est orci, luctus eget dapibus in, mattis quis est.</p>
+        </div>
+
+        <div className='form-block'>
+          <h2>Price: {newOrder.price}</h2>
+          {newOrder.itsmes.map(itsme => (
+            <Itsme
+              key={itsme.id}
+              data={itsme} />
+          ))}
+          <button onClick={::this.handleAddItsme}>ADD ITSME</button>
+        </div>
 
         <CheckBox
           onChange={this.handleChangeProp.bind(this, 'groupSheet')}

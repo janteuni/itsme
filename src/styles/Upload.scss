@@ -1,0 +1,60 @@
+.upload-container {
+  .thumbnail img {
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    &.waiting {
+      opacity: 0.5;
+    }
+  }
+  .thumbnail + .thumbnail {
+    margin-left: 1rem;
+  }
+  .thumbnail {
+    position: relative;
+
+    i {
+      position: absolute;
+      right: -5px;
+      top: -5px;
+
+      z-index: 2;
+      display: block;
+      width: 25px;
+      height: 25px;
+      padding-top: 1px;
+
+      text-align: center;
+      cursor: pointer;
+      background: white;
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+      border-radius: 100%;
+
+      .SvgClose {
+        width: 12px;
+        height: 12px;
+        fill: $grey-400;
+      }
+    }
+  }
+}
+
+.upload-dropzone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  min-height: 200px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+
+  cursor: pointer;
+  text-align: center;
+  color: $grey-400;
+  border: 3px dashed $grey-400;
+  border-radius: 3px;
+
+  .SvgImage {
+    fill: $grey-400;
+  }
+}

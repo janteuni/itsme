@@ -2,8 +2,20 @@
   display: flex;
 }
 
+.align-center {
+  align-items: center;
+}
+
 .flex-auto {
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
+}
+
+.ml1 {
+  margin-left: 1rem;
+}
+
+.mr1 {
+  margin-right: 1rem;
 }

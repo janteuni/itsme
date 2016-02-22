@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
+import Thumbnail from 'components/Thumbnail'
+import SvgImage from 'components/SvgImage'
 import r from 'superagent'
 
 import config from 'config'
@@ -37,30 +39,29 @@ class Upload extends Component {
     const { files } = this.state
     const { cacheImages } = this.props
     return (
-      <div>
-        <Dropzone onDrop={::this.handleDrop}>
-          <div>Try dropping some files here, or click to select files to upload.</div>
+      <div className='upload-container'>
+
+        <Dropzone className='upload-dropzone' onDrop={::this.handleDrop}>
+          <SvgImage />
+          <div>drag and drop your photos</div>
         </Dropzone>
-        {!!cacheImages.length && (
-          <div>
-            {cacheImages.map(file => (
-              <img
-                key={file}
-                src={`${config.uploadPath}/${file}`}
-                onClick={this.handleImageClick.bind(this, file)}/>
-            ))}
-          </div>
-        )}
-        {!!files.length && (
-          <div>
-            <h2>Uploading {files.length} files...</h2>
-            <div>
-              {files.map(file => (
-                <img key={file.name} src={file.preview} />
-              ))}
-            </div>
-          </div>
-        )}
+
+        <div className='flex'>
+          {!!cacheImages.length && (
+              cacheImages.map(file => (
+                <Thumbnail
+                  key={file}
+                  imageId={file}
+                  src={`${config.uploadPath}/${file}`}
+                  onImageDelete={this.props.onImageDelete}/>
+              ))
+          )}
+          {!!files.length && (
+              files.map(file => (
+                <img className='thumbnail waiting' key={file.name} src={file.preview} />
+              ))
+          )}
+        </div>
       </div>
     )
   }

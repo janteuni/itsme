@@ -38,7 +38,7 @@ class Itsme extends Component {
     const { data, isDeletable } = this.props
 
     return (
-      <div>
+      <div className='card'>
         <Upload
           cacheImages={data.images}
           onSuccess={::this.handleUpload}
