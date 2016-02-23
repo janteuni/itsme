@@ -16,7 +16,7 @@ class Upload extends Component {
   }
 
   preloadImgs (imgs) {
-    return Promise.all(imgs.map(img => new Promise ((resolve) => {
+    return Promise.all(imgs.map(img => new Promise((resolve) => {
       const i = new Image()
       i.onload = () => resolve()
       i.src = `${config.uploadPath}/${img}`

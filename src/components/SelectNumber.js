@@ -6,11 +6,11 @@ import ArrowDown from 'components/ArrowDown'
 class SelectNumber extends Component {
 
   handlePlus () {
-    this.props.plus();
+    this.props.plus()
   }
 
   handleMinus () {
-    this.props.minus();
+    this.props.minus()
   }
 
   render () {
