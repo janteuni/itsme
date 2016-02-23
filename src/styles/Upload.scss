@@ -1,16 +1,18 @@
 .upload-container {
-  .thumbnail img {
-    border-radius: 3px;
-    margin-bottom: 1rem;
-    &.waiting {
-      opacity: 0.5;
-    }
-  }
   .thumbnail + .thumbnail {
     margin-left: 1rem;
   }
   .thumbnail {
     position: relative;
+
+    &.waiting {
+      opacity: 0.5;
+    }
+
+    img {
+      border-radius: 3px;
+      margin-bottom: 1rem;
+    }
 
     i {
       position: absolute;

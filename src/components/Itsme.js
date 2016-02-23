@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { updateSheets, addImages, deleteImage, deleteItsme } from 'actions/order'
 import Upload from 'components/Upload'
+import SelectNumber from 'components/SelectNumber'
 
 @connect(
   state => ({
@@ -39,16 +40,23 @@ class Itsme extends Component {
 
     return (
       <div className='card'>
+
         <Upload
           cacheImages={data.images}
           onSuccess={::this.handleUpload}
           onImageDelete={::this.handleImageDelete}/>
-        <p>Sheets: {data.sheets}</p>
-        <button type='button' onClick={::this.handlePlus}>+</button>
-        <button type='button' onClick={::this.handleMinus}>-</button>
+
+        <SelectNumber
+          number={data.sheets}
+          plus={::this.handlePlus}
+          minus={::this.handleMinus}>
+          Sheets
+        </SelectNumber>
+
         {isDeletable && (
           <button onClick={::this.handleDelete}>DELETE ME</button>
         )}
+
       </div>
     )
   }

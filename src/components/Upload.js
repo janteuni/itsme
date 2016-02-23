@@ -15,6 +15,14 @@ class Upload extends Component {
     }
   }
 
+  preloadImgs (imgs) {
+    return Promise.all(imgs.map(img => new Promise ((resolve) => {
+      const i = new Image()
+      i.onload = () => resolve()
+      i.src = `${config.uploadPath}/${img}`
+    })))
+  }
+
   handleDrop (files) {
     this.setState({ files })
 
@@ -26,8 +34,11 @@ class Upload extends Component {
       .send(fd)
       .end((err, res) => {
         if (err) { return }
-        this.setState({ files: [] })
-        onSuccess(res.body)
+        const imgs = res.body
+        this.preloadImgs(imgs).then(() => {
+          this.setState({ files: [] })
+          onSuccess(res.body)
+        })
       })
   }
 
@@ -58,7 +69,9 @@ class Upload extends Component {
           )}
           {!!files.length && (
               files.map(file => (
-                <img className='thumbnail waiting' key={file.name} src={file.preview} />
+                <div key={file.name} className='thumbnail waiting'>
+                  <img src={file.preview} />
+                </div>
               ))
           )}
         </div>
