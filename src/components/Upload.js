@@ -69,8 +69,6 @@ class Upload extends Component {
 
     const allImages = loadedImages.concat(loadingImages)
 
-    console.log(allImages)
-
     return (
       <div className='upload-container'>
 
@@ -80,10 +78,10 @@ class Upload extends Component {
         </Dropzone>
 
         <TransitionGroup
-          className='flex'
+          className='flex flex-wrap'
           transitionName='uploadTransition'
-          transitionEnterTimeout={5000}
-          transitionLeaveTimeout={500}>
+          transitionEnterTimeout={500}
+          transitionLeave={false}>
           {!!allImages.length && (
               allImages.map((file, i) => (
                 <div key={i} className='thumbnail-container'>

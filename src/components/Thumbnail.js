@@ -12,14 +12,16 @@ class Thumbnail extends Component {
 
   render () {
     const { src, loading } = this.props
+    const style = {
+      backgroundImage: `url(${src})`
+    }
     return (
-      <div className={cx('thumbnail', { loading })}>
+      <div className={cx('thumbnail', { loading })} style={style}>
         {!loading && (
           <i onClick={::this.handleImageClick}>
             <SvgClose />
           </i>
         )}
-        <img src={src} />
       </div>
     )
   }
