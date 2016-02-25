@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone'
 import Thumbnail from 'components/Thumbnail'
 import SvgImage from 'components/SvgImage'
 import r from 'superagent'
+import TransitionGroup from 'react-addons-css-transition-group'
 
 import config from 'config'
 
@@ -12,6 +13,12 @@ class Upload extends Component {
     super(props)
     this.state = {
       files: []
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.cacheImages.length !== nextProps.cacheImages.length) {
+      this.setState({ files: [] })
     }
   }
 
@@ -36,7 +43,6 @@ class Upload extends Component {
         if (err) { return }
         const imgs = res.body
         this.preloadImgs(imgs).then(() => {
-          this.setState({ files: [] })
           onSuccess(res.body)
         })
       })
@@ -73,18 +79,23 @@ class Upload extends Component {
           <div>drag and drop your photos</div>
         </Dropzone>
 
-        <div className='flex'>
+        <TransitionGroup
+          className='flex'
+          transitionName='uploadTransition'
+          transitionEnterTimeout={5000}
+          transitionLeaveTimeout={500}>
           {!!allImages.length && (
-              allImages.map(file => (
-                <Thumbnail
-                  key={file.src}
-                  imageId={file.imageId}
-                  src={file.src}
-                  loading={file.loading}
-                  onImageDelete={this.props.onImageDelete}/>
+              allImages.map((file, i) => (
+                <div key={i} className='thumbnail-container'>
+                  <Thumbnail
+                    imageId={file.imageId}
+                    src={file.src}
+                    loading={file.loading}
+                    onImageDelete={this.props.onImageDelete}/>
+                </div>
               ))
           )}
-        </div>
+        </TransitionGroup>
       </div>
     )
   }
