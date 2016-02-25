@@ -49,6 +49,22 @@ class Upload extends Component {
   render () {
     const { files } = this.state
     const { cacheImages } = this.props
+
+    const loadedImages = cacheImages.map(src => ({
+      loading: false,
+      imageId: src,
+      src: `${config.uploadPath}/${src}`
+    }))
+
+    const loadingImages = files.map(file => ({
+      loading: true,
+      src: file.preview
+    }))
+
+    const allImages = loadedImages.concat(loadingImages)
+
+    console.log(allImages)
+
     return (
       <div className='upload-container'>
 
@@ -58,20 +74,14 @@ class Upload extends Component {
         </Dropzone>
 
         <div className='flex'>
-          {!!cacheImages.length && (
-              cacheImages.map(file => (
+          {!!allImages.length && (
+              allImages.map(file => (
                 <Thumbnail
-                  key={file}
-                  imageId={file}
-                  src={`${config.uploadPath}/${file}`}
+                  key={file.src}
+                  imageId={file.imageId}
+                  src={file.src}
+                  loading={file.loading}
                   onImageDelete={this.props.onImageDelete}/>
-              ))
-          )}
-          {!!files.length && (
-              files.map(file => (
-                <div key={file.name} className='thumbnail waiting'>
-                  <img src={file.preview} />
-                </div>
               ))
           )}
         </div>

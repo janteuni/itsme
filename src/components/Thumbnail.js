@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import cx from 'classnames'
 
 import SvgClose from 'components/SvgClose'
 
@@ -10,12 +11,14 @@ class Thumbnail extends Component {
   }
 
   render () {
-    const { src } = this.props
+    const { src, loading } = this.props
     return (
-      <div className='thumbnail'>
-        <i onClick={::this.handleImageClick}>
-          <SvgClose />
-        </i>
+      <div className={cx('thumbnail', { loading })}>
+        {!loading && (
+          <i onClick={::this.handleImageClick}>
+            <SvgClose />
+          </i>
+        )}
         <img src={src} />
       </div>
     )
