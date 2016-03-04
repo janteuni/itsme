@@ -1,0 +1,26 @@
+.CheckBox {
+  display: flex;
+  flex-align: center;
+  position: relative;
+  button {
+    width: 26px;
+    height: 26px;
+    margin-right: 1rem;
+    background-color: $grey-100;
+    border: 1px solid $grey-200;
+    &:hover, &:focus {
+      background-color: $grey-200;
+    }
+    &:active::after, &.active::after {
+      z-index: 3;
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 17px;
+      height: 17px;
+      background-color: $blue-500;
+      box-shadow: 1px 1px 1px rgba(0,0,0, .2);
+    }
+  }
+}

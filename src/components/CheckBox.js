@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import cx from 'classnames'
 
 class CheckBox extends Component {
 
@@ -9,9 +10,9 @@ class CheckBox extends Component {
   render () {
     const { value, label } = this.props
     return (
-      <div>
+      <div className='CheckBox'>
+        <button type='button' onClick={::this.handleClick} className={cx({ active: value })} ></button>
         <label>{label}</label>
-        <button type='button' onClick={::this.handleClick}>Change {value.toString()}</button>
       </div>
     )
   }

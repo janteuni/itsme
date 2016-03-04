@@ -39,7 +39,7 @@ class Itsme extends Component {
     const { data, isDeletable } = this.props
 
     return (
-      <div className='card'>
+      <div className='card mb1'>
 
         <Upload
           cacheImages={data.images}

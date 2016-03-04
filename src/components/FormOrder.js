@@ -60,49 +60,79 @@ class FormOrder extends Component {
               key={itsme.id}
               data={itsme} />
           ))}
-          <button onClick={::this.handleAddItsme}>ADD ITSME</button>
+          <button className="btn btn-default" onClick={::this.handleAddItsme}>+  ADD PEOPLE</button>
         </div>
 
-        <CheckBox
-          onChange={this.handleChangeProp.bind(this, 'groupSheet')}
-          value={newOrder.groupSheet}
-          label='I want a group sheet'/>
+        <div className='form-block'>
+          <CheckBox
+            onChange={this.handleChangeProp.bind(this, 'groupSheet')}
+            value={newOrder.groupSheet}
+            label='I want a group sheet'/>
+        </div>
 
-        <div>
-          <label>Your firstname</label>
-          <input type='text'
-            defaultValue={newOrder.firstname}
-            ref='firstname'
-            onBlur={::this.handleUpdate}/>
-          <label>Your lastname</label>
-          <input type='text'
-            defaultValue={newOrder.lastname}
-            ref='lastname'
-            onBlur={::this.handleUpdate}/>
-          <label>Your email</label>
-          <input type='text'
-            defaultValue={newOrder.email}
-            ref='email'
-            onBlur={::this.handleUpdate}/>
-          <label>Your complete address</label>
-          <textarea type='text'
-            defaultValue={newOrder.address}
-            ref='address'
-            onBlur={::this.handleUpdate}/>
-          <label>Your country</label>
-          <input type='text'
-            defaultValue={newOrder.country}
-            ref='country'
-            onBlur={::this.handleUpdate}/>
+        <div className='form-title'>
+          <div className='dot-number'>2</div>
+          <h1>Your informations</h1>
+        </div>
+
+        <div className='form-block'>
+          <div className='flex'>
+            <div className='form-block-input'>
+              <label>Your firstname</label>
+              <input type='text'
+                defaultValue={newOrder.firstname}
+                ref='firstname'
+                onBlur={::this.handleUpdate}/>
+            </div>
+            <div className='form-block-input'>
+              <label>Your lastname</label>
+              <input type='text'
+                defaultValue={newOrder.lastname}
+                ref='lastname'
+                onBlur={::this.handleUpdate}/>
+            </div>
           </div>
 
-          <label>A last comment</label>
-          <textarea type='text'
-            defaultValue={newOrder.comment}
-            ref='comment'
-            onBlur={::this.handleUpdate}/>
+          <div className='form-block-input'>
+            <label>Your email</label>
+            <input type='text'
+              defaultValue={newOrder.email}
+              ref='email'
+              onBlur={::this.handleUpdate}/>
+          </div>
 
-        <button>SAVE</button>
+          <div className='form-block-input'>
+            <label>Your complete address</label>
+            <textarea type='text'
+              defaultValue={newOrder.address}
+              ref='address'
+              onBlur={::this.handleUpdate}/>
+          </div>
+
+          <div className='form-block-input'>
+            <label>Your country</label>
+            <input type='text'
+              defaultValue={newOrder.country}
+              ref='country'
+              onBlur={::this.handleUpdate}/>
+          </div>
+        </div>
+
+        <div className='form-title'>
+          <div className='dot-number'>3</div>
+          <h1>Payment</h1>
+        </div>
+
+        <div className='form-block'>
+          <div className='form-block-input'>
+            <label>A last comment</label>
+            <textarea type='text'
+              defaultValue={newOrder.comment}
+              ref='comment'
+              onBlur={::this.handleUpdate}/>
+          </div>
+          <button className='btn btn-default'>SAVE</button>
+        </div>
       </form>
     )
   }
