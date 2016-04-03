@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { prefetch } from 'react-fetcher'
+import { provideHooks } from 'redial'
 import { Link } from 'react-router'
 
 import { loadList, setCurrentOrder } from 'actions/admin'
 
-@prefetch(({ dispatch }) => dispatch(loadList()))
+@provideHooks({
+  fetch: ({ dispatch }) => dispatch(loadList())
+})
 @connect(
   state => ({
     orders: state.orders.list.map(id => state.orders.orders[id])

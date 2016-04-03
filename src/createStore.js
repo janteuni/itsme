@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { syncHistory } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
 import reducer from 'reducers'
@@ -10,6 +10,7 @@ export default history => {
     ? window.__INITIAL_STATE__
     : {}
 
+  const routing = routerMiddleware(history)
   const isProduction = process.env.NODE_ENV === 'production'
 
   const devTools = (process.env.BROWSER && window.devToolsExtension && !isProduction)
@@ -17,7 +18,7 @@ export default history => {
     : f => f
 
   const enhancers = compose(
-    applyMiddleware(syncHistory(history), thunk),
+    applyMiddleware(thunk, routing),
     devTools
   )
 

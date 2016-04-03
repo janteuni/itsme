@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { prefetch } from 'react-fetcher'
+import { provideHooks } from 'redial'
 
 import { updateStatus, setCurrentOrder, fetchOrder } from 'actions/admin'
 import ItsmeAdmin from 'components/ItsmeAdmin'
 
-@prefetch(
-  ({ params, dispatch }) => {
+@provideHooks({
+  fetch: ({ params, dispatch }) => {
     return dispatch(fetchOrder(params.id))
       .then(() => dispatch(setCurrentOrder(params.id)))
   }
-)
+})
 @connect(
  state => ({
    order: state.orders.orders[state.orders.current]

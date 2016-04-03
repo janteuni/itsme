@@ -1,8 +1,9 @@
 import path from 'path'
 import React from 'react'
-import { getPrefetchedData } from 'react-fetcher'
+import { trigger } from 'redial'
 import { Provider } from 'react-redux'
 import { Router, match, createMemoryHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 
 import config from 'config'
@@ -11,18 +12,23 @@ import createStore from 'createStore'
 
 import Html from 'Html'
 
+const stats = (config.env === 'production')
+  ? require(path.join(config.distFolder, 'stats.json'))
+  : {}
+
 export default (req, res) => {
 
   const { url } = req
-  const history = createMemoryHistory(url)
-  const location = history.createLocation(url)
+  const memHistory = createMemoryHistory(url)
+  const location = memHistory.createLocation(url)
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
 
     if (err) { return res.status(500).end('internal server error') }
     if (!renderProps) { return res.status(404).end('not found') }
 
-    const store = createStore(history)
+    const store = createStore(memHistory)
+    const history = syncHistoryWithStore(memHistory, store)
 
     const { dispatch } = store
 
@@ -35,7 +41,7 @@ export default (req, res) => {
 
     const components = renderProps.routes.map(route => route.component)
 
-    getPrefetchedData(components, locals).then(() => {
+    trigger('fetch', components, locals).then(() => {
 
       const root = (
         <Provider store={store}>
@@ -44,10 +50,6 @@ export default (req, res) => {
       )
 
       const state = store.getState()
-
-      const stats = (config.env === 'production')
-        ? require(path.join(config.distFolder, 'stats.json'))
-        : {}
 
       const HtmlComponent = (
         <Html
@@ -61,8 +63,6 @@ export default (req, res) => {
 
       res.end(page)
 
-    }).catch(err => {
-      res.status(500).send(err.stack)
     })
   })
 
