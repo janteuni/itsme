@@ -3,6 +3,13 @@ import r from 'superagent'
 
 import config from 'config'
 
+const userLogged = createAction('USER_LOGGED')
+
+export const userLogin = () => dispatch => new Promise((resolve, reject) => {
+  dispatch(userLogged({ user: 'jasmine', token: '123' }))
+  resolve()
+})
+
 const listLoaded = createAction('LIST_LOADED', list => list)
 
 export const loadList = () => dispatch => new Promise((resolve, reject) => {
