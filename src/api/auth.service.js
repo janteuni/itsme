@@ -11,17 +11,6 @@ const validateJwt = expressJwt({ secret })
  */
 export const isAuthenticated = () => compose()
   .use(validateJwt)
-  .use((req, res, next) => {
-    return res.send(401)
-    /*
-    User.findById(req.user._id, (err, user) => {
-      if (err) { return next(err) }
-      if (!user) { return res.send(401) }
-      req.user = user
-      next()
-    })
-   */
-  })
 
 /**
  * Returns a jwt token, signed by the app secret

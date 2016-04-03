@@ -32,26 +32,30 @@ router.post('/login', (req, res, next) => {
 })
 
 // -----------------------------------
-// API
+// API - admin
 // -----------------------------------
 
-router.get('/orders', (req, res) => {
+router.get('/orders', auth.isAuthenticated(), (req, res) => {
   Order.getOrders()
     .then(orders => res.status(200).send(orders))
     .catch(err => res.status(500).send(err))
 })
 
-router.get('/orders/:id', (req, res) => {
+router.get('/orders/:id', auth.isAuthenticated(), (req, res) => {
   Order.getOrder(req.params.id)
     .then(order => res.status(200).send(order))
     .catch(err => res.status(500).send(err))
 })
 
-router.put('/orders/:id', (req, res) => {
+router.put('/orders/:id', auth.isAuthenticated(), (req, res) => {
   Order.updateOrder(req.params.id, req.body)
     .then(order => res.status(200).send(order))
     .catch(err => res.status(500).send(err))
 })
+
+// -----------------------------------
+// API - client
+// -----------------------------------
 
 router.post('/orders', (req, res) => {
   Order.saveOrder(req.body)

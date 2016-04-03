@@ -3,6 +3,7 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
 import reducer from 'reducers'
+import adminMiddleware from 'middlewares/admin'
 
 export default history => {
 
@@ -18,7 +19,7 @@ export default history => {
     : f => f
 
   const enhancers = compose(
-    applyMiddleware(thunk, routing),
+    applyMiddleware(thunk, routing, adminMiddleware),
     devTools
   )
 

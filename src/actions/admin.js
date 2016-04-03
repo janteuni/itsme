@@ -21,36 +21,28 @@ export const userLogin = () => dispatch => new Promise((resolve, reject) => {
 
 const listLoaded = createAction('LIST_LOADED', list => list)
 
-export const loadList = () => dispatch => new Promise((resolve, reject) => {
-  r.get(`${config.apiFull}/orders`)
-    .end((err, res) => {
-      if (err) { return reject(err) }
-      dispatch(listLoaded(res.body))
-      resolve()
-    })
+export const loadList = () => ({
+  type: 'admin:loadlist',
+  url: '/orders',
+  cb: (list, dispatch) => dispatch(listLoaded(list))
 })
 
-export const fetchOrder = (id) => dispatch => new Promise((resolve, reject) => {
-  r.get(`${config.apiFull}/orders/${id}`)
-    .end((err, res) => {
-      if (err) { return reject(err) }
-      dispatch(listLoaded([res.body]))
-      resolve()
-    })
+export const fetchOrder = (id) => ({
+  type: 'admin:fetchorder',
+  url: `/orders/${id}`,
+  cb: (order, dispatch) => { dispatch(listLoaded([order])) }
 })
 
 export const setCurrentOrder = createAction('SET_CURRENT_ORDER')
 
 const statusUpdated = createAction('STATUS_UPDATED')
 
-export const updateStatus = payload => dispatch => new Promise((resolve, reject) => {
-  r.put(`${config.apiFull}/orders/${payload.id}`)
-    .send({ status: payload.status })
-    .end(err => {
-      if (err) { return reject(err) }
-      dispatch(statusUpdated(payload))
-      resolve()
-    })
+export const updateStatus = (payload) => ({
+  type: 'admin:updateStatus',
+  method: 'put',
+  url: `/orders/${payload.id}`,
+  send: { status: payload.status },
+  cb: (body, dispatch) => { dispatch(statusUpdated(payload)) }
 })
 
 export const addResults = createAction('ADD_RESULTS')

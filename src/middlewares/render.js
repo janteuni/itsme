@@ -79,6 +79,8 @@ export default (req, res) => {
 
       res.end(page)
 
+    }).catch(() => {
+      res.redirect('/')
     })
   })
 
