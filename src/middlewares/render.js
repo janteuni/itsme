@@ -1,4 +1,5 @@
 import path from 'path'
+import jwt from 'jsonwebtoken'
 import React from 'react'
 import { trigger } from 'redial'
 import { Provider } from 'react-redux'
@@ -10,7 +11,11 @@ import config from 'config'
 import routes from 'routes'
 import createStore from 'createStore'
 
+import { userLogged } from 'actions/admin'
+
 import Html from 'Html'
+
+const secret = 'yolo-secret'
 
 const stats = (config.env === 'production')
   ? require(path.join(config.distFolder, 'stats.json'))
@@ -22,6 +27,9 @@ export default (req, res) => {
   const memHistory = createMemoryHistory(url)
   const location = memHistory.createLocation(url)
 
+  const { cookies } = req
+  const token = cookies ? cookies['itsme-token'] : false
+
   match({ routes, location }, (err, redirectLocation, renderProps) => {
 
     if (err) { return res.status(500).end('internal server error') }
@@ -29,6 +37,14 @@ export default (req, res) => {
 
     const store = createStore(memHistory)
     const history = syncHistoryWithStore(memHistory, store)
+
+    try {
+      jwt.verify(token, secret)
+      store.dispatch(userLogged({
+        user: 'jasmine',
+        token
+      }))
+    } catch (e) {} // eslint-disable-line
 
     const { dispatch } = store
 

@@ -1,13 +1,22 @@
 import { createAction } from 'redux-actions'
 import r from 'superagent'
+import Cookies from 'js-cookie'
 
 import config from 'config'
 
-const userLogged = createAction('USER_LOGGED')
+export const userLogged = createAction('USER_LOGGED')
 
 export const userLogin = () => dispatch => new Promise((resolve, reject) => {
-  dispatch(userLogged({ user: 'jasmine', token: '123' }))
-  resolve()
+
+  r.post(`${config.apiFull}/login`)
+    .send({ username: 'jasmine', password: 'jasmine' })
+    .end((err, res) => {
+      if (err) { return reject(err) }
+      dispatch(userLogged(res.body))
+      Cookies.set('itsme-token', res.body.token, { expires: 365 })
+      resolve()
+    })
+
 })
 
 const listLoaded = createAction('LIST_LOADED', list => list)

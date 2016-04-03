@@ -1,17 +1,39 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import passport from 'passport'
 import path from 'path'
 import fs from 'fs'
 
 import config from 'config'
 import * as Order from 'api/order.service'
 import upload from 'api/upload'
+import * as auth from 'api/auth.service'
+
+import 'api/auth/passport-local'
 
 mongoose.connect('mongodb://localhost/itsme')
 
 const router = express.Router()
 
-router.get('/', (req, res) => res.send('[ API UP ]'))
+// -----------------------------------
+// LOGIN
+// -----------------------------------
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    const error = err || info
+    if (error) { return res.status(401).json(error) }
+    if (!user) { return res.status(401).json({ msg: 'login failed' }) }
+    res.json({
+      user: 'jasmine',
+      token: auth.signToken('jasmine')
+    })
+  })(req, res, next)
+})
+
+// -----------------------------------
+// API
+// -----------------------------------
 
 router.get('/orders', (req, res) => {
   Order.getOrders()

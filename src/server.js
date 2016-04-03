@@ -1,6 +1,7 @@
 import express from 'express'
 import compression from 'compression'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 
 import config from 'config'
 import api from 'api'
@@ -11,6 +12,8 @@ const server = express()
 if (config.env === 'development') {
   require('middlewares/dev-server').default(server)
 }
+
+server.use(cookieParser())
 
 if (config.env === 'production') {
   server.use(compression())

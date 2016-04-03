@@ -1,5 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 
 import api from 'api'
 import config from 'config'
@@ -13,6 +14,7 @@ server.use((req, res, next) => {
   next()
 })
 
+server.use(cookieParser())
 server.use(bodyParser.json())
 server.use(config.apiUrl, api)
 
