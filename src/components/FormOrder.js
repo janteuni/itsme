@@ -60,7 +60,7 @@ class FormOrder extends Component {
               key={itsme.id}
               data={itsme} />
           ))}
-          <button className="btn btn-default" onClick={::this.handleAddItsme}>+  ADD PEOPLE</button>
+          <button className='btn btn-default' onClick={::this.handleAddItsme}>+  ADD PEOPLE</button>
         </div>
 
         <div className='form-block'>
