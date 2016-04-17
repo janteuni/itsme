@@ -1,0 +1,53 @@
+.Usages {
+  .usage-bloc {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    display: flex;
+    align-items: center;
+
+    div {
+      max-width: 1240px;
+      padding: 1rem;
+      margin: 0 auto;
+      width: 100%;
+      color: rgba(255,255,255, 0.9);
+      &.right {
+        text-align: right;
+        color: $blue-500;
+      }
+    }
+
+    h1 {
+      font-size: 4rem;
+      line-height: 4.1rem;
+    }
+  }
+
+  .usage-bloc:nth-child(2) {
+    background-position: bottom right;
+    background-color: #BF2443;
+    background-image: url(../assets/usages/itsme-slide-5b.jpg);
+  }
+  .usage-bloc:nth-child(3) {
+    background-position: bottom left;
+    background-color: #D5E3E4;
+    background-image: url(../assets/usages/itsme-slide-3b.jpg);
+  }
+  .usage-bloc:nth-child(4) {
+    background-position: top right;
+    background-color: #83B4C8;
+    background-image: url(../assets/usages/itsme-slide-2.jpg);
+  }
+  .usage-bloc:nth-child(5) {
+    background-position: top left;
+    background-color: #E7EBEA;
+    background-image: url(../assets/usages/itsme-slide-1.jpg);
+  }
+  .usage-bloc:nth-child(6) {
+    background-position: bottom right;
+    background-color: #50CCC2;
+    background-image: url(../assets/usages/itsme-slide-4b.jpg);
+  }
+}

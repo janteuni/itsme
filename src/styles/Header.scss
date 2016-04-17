@@ -36,7 +36,7 @@ header {
   }
 
   .Logo {
-    margin-left: 3rem;
+    margin-left: 1rem;
     .st0 {
       fill: white;
     }
@@ -47,4 +47,9 @@ header {
 .header {
   width: 100%;
   height: 64px;
+}
+
+.usages-header {
+  @extend header;
+  background-color: #BF2443;
 }

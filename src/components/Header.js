@@ -18,10 +18,11 @@ class Header extends Component {
           <div className='flex-auto'>
             <Logo width={80} />
           </div>
+          <Link activeClassName='active' onlyActiveOnIndex to={'/'}>Home</Link>
           {isLogged && <Link to={'/admin/orders'}>Admin</Link>}
           {!isLogged && <Link to={'/login'}>Login</Link>}
           <Link activeClassName='active' to={'/create'}>Create</Link>
-          <Link activeClassName='active' to={'/'}>Home</Link>
+          <Link activeClassName='active' to={'/how-to-use'}>How to use</Link>
         </nav>
       </header>
     )

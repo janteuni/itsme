@@ -38,6 +38,9 @@ export default {
       test: /\.scss$/,
       loaders: ['style', 'css', 'postcss'],
       exclude: /node_modules/
+    }, {
+      test: /\.jpg$/,
+      loader: 'file'
     }]
   },
 
