@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import FormOrder from 'components/FormOrder'
+import FormIllustrations from 'components/FormIllustrations'
 
 class Create extends Component {
 
@@ -8,10 +9,14 @@ class Create extends Component {
     return (
       <div className='flex'>
         <div className='illustration--container'>
-          <h1>Order your Itsme</h1>
+         <div className='header'></div>
+         <FormIllustrations />
         </div>
-        <div className='flex-auto'>
-          <FormOrder />
+         <div className='flex-auto'>
+          <div className='form-header'></div>
+          <div className='p2'>
+            <FormOrder />
+          </div>
         </div>
       </div>
     )

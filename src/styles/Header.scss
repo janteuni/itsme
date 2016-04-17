@@ -1,11 +1,50 @@
 header {
-  background: $blue-500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  nav {
+    display: flex;
+    align-items: center;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
   a {
     display: inline-block;
-    padding: 1rem;
+    padding: 19px 12px 22px 12px;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.25px;
+    font-family: 'Roboto Mono', Roboto, sans-serif;
 
-    color: $blue-100;
+    color: white;
     text-decoration: none;
     text-transform: uppercase;
+
+    transition: border-bottom-color 0.1s ease-out;
+    border-bottom: 2px solid transparent;
+
+    &.active {
+      border-bottom: 2px solid rgba(255,255,255,1);
+    }
+
+    &:hover {
+      border-bottom: 2px solid rgba(255,255,255,0.5);
+    }
   }
+
+  .Logo {
+    margin-left: 3rem;
+    .st0 {
+      fill: white;
+    }
+  }
+
+}
+
+.header {
+  width: 100%;
+  height: 64px;
 }

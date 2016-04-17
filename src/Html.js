@@ -6,7 +6,8 @@ const Html = ({ content, state, stats: { style, main = 'bundle.js' } }) => (
 
       <meta charSet='utf-8' />
       <link rel='icon' href='/assets/favicon.ico' type='image/x-icon' />
-
+      <link href='https://fonts.googleapis.com/css?family=Karla:400,400italic,700,700italic' rel='stylesheet' type='text/css' />
+      <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,300,700,500' rel='stylesheet' type='text/css' />
       <title>{'[::]'}</title>
 
       {style && (

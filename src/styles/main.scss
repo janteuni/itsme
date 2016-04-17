@@ -7,11 +7,6 @@
 @import './Upload.scss';
 @import './Header.scss';
 @import './FormOrder.scss';
+@import './FormIllustrations.scss';
 @import './CheckBox.scss';
 @import './SelectNumber.scss';
-
-.illustration--container {
-  min-width: 600px;
-  background-color: $pink-500;
-  padding: 1rem;
-}

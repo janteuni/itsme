@@ -1,23 +1,40 @@
+@import './Header.scss';
+
+.form-header {
+  @extend .header;
+  background-color: $blue-500;
+}
+
 .form-container {
-  padding: 2rem;
+  color: $grey-600;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .form-title {
   display: flex;
   align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 
   h1 {
     margin-left: 1rem;
     font-size: 1.5rem;
+    color: $blue-600;
   }
 }
 
 .form-block {
   margin-left: 76px;
+  margin-right: 76px;
 }
 
 .form-block + .form-block {
   margin-top: 2rem;
+}
+
+.form-block + .form-title {
+  margin-top: 5rem;
 }
 
 .form-block-input {
